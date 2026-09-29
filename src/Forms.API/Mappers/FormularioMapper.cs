@@ -1,26 +1,39 @@
-﻿using Forms.API.DTOs;
+using Forms.API.DTOs;
 using Forms.API.Models;
 
 namespace Forms.API.Mappers
 {
     public static class FormularioMapper
     {
-        public static FormularioModel ToModel(this CreateFormularioDTO dto, UsuarioModel criador)
+        public static FormularioModel ToModel(this FormularioDTO dto, UsuarioModel criador)
         {
-            return new FormularioModel
+            var formulario = new FormularioModel
             {
-                Titulo = dto.Titulo,
-                Descricao = dto.Descricao,
+                Titulo = dto.Titulo.Trim(),
+                Descricao = dto.Descricao?.Trim(),
+                Status = dto.Status,
                 DataCriacao = DateTime.UtcNow,
                 CriadorId = criador.Id,
                 Criador = criador
             };
+
+            if (dto.Perguntas != null && dto.Perguntas.Any())
+            {
+                int ordem = 1;
+                formulario.Perguntas = dto.Perguntas.Select(p =>
+                {
+                    int itemOrdem = p.Ordem > 0 ? p.Ordem : ordem++;
+                    return p.ToModel(0, itemOrdem);
+                }).ToList();
+            }
+
+            return formulario;
         }
 
-        public static void ApplyUpdate(this FormularioModel formulario, UpdateFormularioDTO dto)
+        public static void ApplyUpdate(this FormularioModel formulario, FormularioDTO dto)
         {
-            formulario.Titulo = dto.Titulo;
-            formulario.Descricao = dto.Descricao;
+            formulario.Titulo = dto.Titulo.Trim();
+            formulario.Descricao = dto.Descricao?.Trim();
             formulario.Status = dto.Status;
             formulario.DataAtualizacao = DateTime.UtcNow;
         }
@@ -35,8 +48,10 @@ namespace Forms.API.Mappers
                 DataCriacao = formulario.DataCriacao,
                 DataAtualizacao = formulario.DataAtualizacao,
                 Status = formulario.Status,
-                //CriadorId = formulario.CriadorId,
-                //CriadorNome = formulario.Criador.Nome // ajuste conforme o nome real da propriedade em UsuarioModel
+                Perguntas = formulario.Perguntas?
+                    .OrderBy(p => p.Ordem)
+                    .Select(p => p.ToResponseDTO())
+                    .ToList() ?? new List<PerguntaResponseDTO>()
             };
         }
     }

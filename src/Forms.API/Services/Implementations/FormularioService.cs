@@ -1,4 +1,4 @@
-﻿using Forms.API.DTOs;
+using Forms.API.DTOs;
 using Forms.API.Enums;
 using Forms.API.Exceptions;
 using Forms.API.Mappers;
@@ -24,11 +24,25 @@ namespace Forms.API.Services.Implementations
             _currentUserService = currentUserService;
         }
 
-        public async Task<ResponseDTO<FormularioResponseDTO>> AddFormularioAsync(CreateFormularioDTO dto)
+        #region Formulário
+
+        public async Task<ResponseDTO<FormularioResponseDTO>> AddFormularioAsync(FormularioDTO dto)
         {
             int usuarioId = _currentUserService.GetCurrentUserId();
             UsuarioModel usuario = await _usuarioRepository.GetByIdAsync(usuarioId)
                 ?? throw new NotFoundException($"Usuário com id {usuarioId} não encontrado.");
+
+            if (dto.Perguntas != null && dto.Perguntas.Any())
+            {
+                foreach (var p in dto.Perguntas)
+                {
+                    if (!p.Tipo.PermiteAlternativas() && p.Alternativas != null && p.Alternativas.Any())
+                        throw new ArgumentException($"Perguntas do tipo '{p.Tipo}' não aceitam alternativas.");
+
+                    if (p.Alternativas != null && p.Alternativas.Any(a => string.IsNullOrWhiteSpace(a.Texto)))
+                        throw new ArgumentException("O texto da alternativa não pode ser vazio.");
+                }
+            }
 
             FormularioModel formulario = dto.ToModel(usuario);
             await _formularioRepository.AddAsync(formulario);
@@ -45,7 +59,7 @@ namespace Forms.API.Services.Implementations
         {
             FormularioModel? formulario = await _formularioRepository.GetByIdAsync(id);
 
-            if (formulario == null || !UsuarioPodeAcessar(formulario))
+            if (formulario == null || (!UsuarioPodeAcessar(formulario) && formulario.Status != StatusFormulario.Publicado))
                 throw new NotFoundException($"Formulário com id {id} não encontrado.");
 
             return formulario.ToResponseDTO();
@@ -57,12 +71,15 @@ namespace Forms.API.Services.Implementations
             return formularios.Select(f => f.ToResponseDTO());
         }
 
-        public async Task<ResponseDTO> UpdateFormularioAsync(int id, UpdateFormularioDTO dto)
+        public async Task<ResponseDTO> UpdateFormularioAsync(int id, FormularioDTO dto)
         {
             FormularioModel? formulario = await _formularioRepository.GetByIdAsync(id);
 
-            if (formulario == null || !UsuarioPodeAcessar(formulario))
+            if (formulario == null)
                 throw new NotFoundException($"Formulário com id {id} não encontrado.");
+
+            if (!UsuarioPodeAcessar(formulario))
+                throw new ForbiddenException("Você não tem permissão para alterar este formulário.");
 
             formulario.ApplyUpdate(dto);
             await _formularioRepository.UpdateAsync(formulario);
@@ -78,8 +95,11 @@ namespace Forms.API.Services.Implementations
         {
             FormularioModel? formulario = await _formularioRepository.GetByIdAsync(id);
 
-            if (formulario == null || !UsuarioPodeAcessar(formulario))
+            if (formulario == null)
                 throw new NotFoundException($"Formulário com id {id} não encontrado.");
+
+            if (!UsuarioPodeAcessar(formulario))
+                throw new ForbiddenException("Você não tem permissão para deletar este formulário.");
 
             await _formularioRepository.DeleteAsync(formulario);
 
@@ -89,6 +109,10 @@ namespace Forms.API.Services.Implementations
                 Message = "Formulário deletado com sucesso."
             };
         }
+
+        #endregion
+
+        #region Métodos Auxiliares
 
         private bool UsuarioPodeAcessar(FormularioModel formulario)
         {
@@ -100,5 +124,7 @@ namespace Forms.API.Services.Implementations
 
             return isDono || isAdmin;
         }
+
+        #endregion
     }
 }

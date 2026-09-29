@@ -1,4 +1,4 @@
-﻿using Forms.API.Enums;
+using Forms.API.Enums;
 
 namespace Forms.API.DTOs
 {
@@ -11,7 +11,6 @@ namespace Forms.API.DTOs
         public DateTime? DataAtualizacao { get; set; }
         public StatusFormulario Status { get; set; }
 
-        //public int CriadorId { get; set; }
-        //public required string CriadorNome { get; set; }
+        public List<PerguntaResponseDTO> Perguntas { get; set; } = new();
     }
 }

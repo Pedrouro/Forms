@@ -1,33 +1,83 @@
-﻿using Forms.API.Models;
+using Forms.API.Data;
+using Forms.API.Models;
 using Forms.API.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Forms.API.Repositories.Implementations
 {
     public class PerguntaRepository : IPerguntaRepository
     {
-        public Task AddAsync(PerguntaModel pergunta)
+        private readonly FormsDbContext _dbContext;
+
+        public PerguntaRepository(FormsDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task DeleteAsync(int id)
+        public async Task<PerguntaModel> AddAsync(PerguntaModel pergunta)
         {
-            throw new NotImplementedException();
+            await _dbContext.Pergunta.AddAsync(pergunta);
+            await _dbContext.SaveChangesAsync();
+            return pergunta;
         }
 
-        public Task<IEnumerable<PerguntaModel>> GetAllAsync()
+        public async Task DeleteAsync(PerguntaModel pergunta)
         {
-            throw new NotImplementedException();
+            _dbContext.Pergunta.Remove(pergunta);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task<PerguntaModel> GetByIdAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            PerguntaModel? pergunta = await _dbContext.Pergunta.FindAsync(id);
+            if (pergunta != null)
+            {
+                _dbContext.Pergunta.Remove(pergunta);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
-        public Task UpdateAsync(PerguntaModel pergunta)
+        public async Task<IEnumerable<PerguntaModel>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Pergunta
+                .Include(p => p.Alternativas)
+                .OrderBy(p => p.Ordem)
+                .ToListAsync();
+        }
+
+        public async Task<PerguntaModel?> GetByIdAsync(int id)
+        {
+            return await _dbContext.Pergunta
+                .Include(p => p.Alternativas)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<IEnumerable<PerguntaModel>> GetByFormularioIdAsync(int formularioId)
+        {
+            return await _dbContext.Pergunta
+                .Include(p => p.Alternativas)
+                .Where(p => p.FormularioId == formularioId)
+                .OrderBy(p => p.Ordem)
+                .ToListAsync();
+        }
+
+        public async Task<int> GetMaxOrdemByFormularioIdAsync(int formularioId)
+        {
+            return await _dbContext.Pergunta
+                .Where(p => p.FormularioId == formularioId)
+                .MaxAsync(p => (int?)p.Ordem) ?? 0;
+        }
+
+        public async Task UpdateAsync(PerguntaModel pergunta)
+        {
+            _dbContext.Pergunta.Update(pergunta);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateRangeAsync(IEnumerable<PerguntaModel> perguntas)
+        {
+            _dbContext.Pergunta.UpdateRange(perguntas);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

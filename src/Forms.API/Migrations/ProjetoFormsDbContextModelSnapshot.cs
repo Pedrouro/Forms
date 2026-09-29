@@ -119,6 +119,9 @@ namespace ProjetoForms.Migrations
                     b.Property<int>("FormularioId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Obrigatoria")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Ordem")
                         .HasColumnType("int");
 
@@ -196,7 +199,7 @@ namespace ProjetoForms.Migrations
             modelBuilder.Entity("Forms.API.Models.AlternativaModel", b =>
                 {
                     b.HasOne("Forms.API.Models.PerguntaModel", "Pergunta")
-                        .WithMany()
+                        .WithMany("Alternativas")
                         .HasForeignKey("PerguntaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -237,7 +240,7 @@ namespace ProjetoForms.Migrations
             modelBuilder.Entity("Forms.API.Models.PerguntaModel", b =>
                 {
                     b.HasOne("Forms.API.Models.FormularioModel", "Formulario")
-                        .WithMany()
+                        .WithMany("Perguntas")
                         .HasForeignKey("FormularioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -268,6 +271,16 @@ namespace ProjetoForms.Migrations
                     b.Navigation("Pergunta");
 
                     b.Navigation("envio");
+                });
+
+            modelBuilder.Entity("Forms.API.Models.FormularioModel", b =>
+                {
+                    b.Navigation("Perguntas");
+                });
+
+            modelBuilder.Entity("Forms.API.Models.PerguntaModel", b =>
+                {
+                    b.Navigation("Alternativas");
                 });
 #pragma warning restore 612, 618
         }

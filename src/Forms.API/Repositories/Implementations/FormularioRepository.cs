@@ -1,4 +1,4 @@
-﻿using Forms.API.Data;
+using Forms.API.Data;
 using Forms.API.Models;
 using Forms.API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -25,13 +25,16 @@ namespace Forms.API.Repositories.Implementations
         {
             return await _dbContext.Formulario
                 .Include(f => f.Criador)
+                .Include(f => f.Perguntas.OrderBy(p => p.Ordem))
+                    .ThenInclude(p => p.Alternativas)
                 .FirstOrDefaultAsync(f => f.Id == id);
         }
 
         public async Task<IEnumerable<FormularioModel>> GetAllAsync()
         {
             return await _dbContext.Formulario
-                //.Include(f => f.Criador)
+                .Include(f => f.Perguntas.OrderBy(p => p.Ordem))
+                    .ThenInclude(p => p.Alternativas)
                 .ToListAsync();
         }
 

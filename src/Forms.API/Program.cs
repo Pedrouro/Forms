@@ -20,7 +20,11 @@ if(builder.Environment.IsDevelopment())
 
 builder.Configuration.AddEnvironmentVariables();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+    });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen(options =>
@@ -100,6 +104,8 @@ builder.Services.AddScoped<IAlternativaRepository, AlternativaRepository>();
 // Services
 
 builder.Services.AddScoped<IFormularioService, FormularioService>();
+builder.Services.AddScoped<IPerguntaService, PerguntaService>();
+builder.Services.AddScoped<IAlternativaService, AlternativaService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();

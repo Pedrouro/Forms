@@ -1,4 +1,4 @@
-﻿using Forms.API.Enums;
+using Forms.API.Enums;
 
 namespace Forms.API.Models
 {
@@ -13,5 +13,7 @@ namespace Forms.API.Models
 
         public int CriadorId { get; set; }
         public required UsuarioModel Criador { get; set; }
+
+        public ICollection<PerguntaModel> Perguntas { get; set; } = new List<PerguntaModel>();
     }
 }

@@ -21,8 +21,8 @@ services:
 
   api:
     build:
-      context: "./src/Forms.API/"
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: src/Forms.API/Dockerfile
 
     ports:
       - "5000:8080"

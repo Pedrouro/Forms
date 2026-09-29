@@ -1,4 +1,4 @@
-﻿using Forms.API.Models;
+using Forms.API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Forms.API.Data
@@ -16,7 +16,6 @@ namespace Forms.API.Data
         public DbSet<EnvioModel> Envio { get; set; }
         public DbSet<AlternativaModel> Alternativa { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(FormsDbContext).Assembly);
@@ -26,7 +25,22 @@ namespace Forms.API.Data
             modelBuilder.Entity<UsuarioModel>()
                 .Property(u => u.Perfil)
                 .HasConversion<string>();
-        }
 
+            modelBuilder.Entity<PerguntaModel>()
+                .Property(p => p.Tipo)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<FormularioModel>()
+                .HasMany(f => f.Perguntas)
+                .WithOne(p => p.Formulario)
+                .HasForeignKey(p => p.FormularioId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<PerguntaModel>()
+                .HasMany(p => p.Alternativas)
+                .WithOne(a => a.Pergunta)
+                .HasForeignKey(a => a.PerguntaId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }
