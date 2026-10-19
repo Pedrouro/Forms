@@ -19,7 +19,7 @@ public class FormularioControllerTests
     }
 
     [Fact]
-    public async Task CreateFormulario_WithValidData_ReturnsCreatedAtActionResult()
+    public async Task CreateFormulario_ComDadosValidos_RetornaCreatedAtActionResult()
     {
         // Arrange
         var formularioDto = new FormularioDTO
@@ -59,7 +59,7 @@ public class FormularioControllerTests
     }
 
     [Fact]
-    public async Task GetFormulario_WithExistingId_ReturnsOkResultWithFormulario()
+    public async Task GetFormulario_ComIdExistente_RetornaOkResultComFormulario()
     {
         // Arrange
         int formId = 1;
@@ -87,7 +87,7 @@ public class FormularioControllerTests
     }
 
     [Fact]
-    public async Task GetAllFormularios_WhenCalled_ReturnsOkResultWithListOfFormularios()
+    public async Task GetAllFormularios_QuandoChamado_RetornaOkResultComListaDeFormularios()
     {
         // Arrange
         var formulariosList = new List<FormularioResponseDTO>
@@ -111,7 +111,7 @@ public class FormularioControllerTests
     }
 
     [Fact]
-    public async Task UpdateFormulario_WithValidData_ReturnsOkResultWithResponseDTO()
+    public async Task UpdateFormulario_ComDadosValidos_RetornaOkResultComResponseDTO()
     {
         // Arrange
         int formId = 1;
@@ -138,7 +138,7 @@ public class FormularioControllerTests
     }
 
     [Fact]
-    public async Task DeleteFormulario_WithValidId_ReturnsOkResultWithResponseDTO()
+    public async Task DeleteFormulario_ComIdValido_RetornaOkResultComResponseDTO()
     {
         // Arrange
         int formId = 1;

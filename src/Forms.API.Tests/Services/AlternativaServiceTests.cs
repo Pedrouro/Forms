@@ -65,7 +65,7 @@ public class AlternativaServiceTests
         };
 
     [Fact]
-    public async Task AddAlternativaAsync_WhenPerguntaNotFound_ThrowsNotFoundException()
+    public async Task AddAlternativaAsync_QuandoPerguntaNaoEncontrada_LancaNotFoundException()
     {
         // Arrange
         int perguntaId = 99;
@@ -79,7 +79,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task AddAlternativaAsync_WhenPerguntaTypeDoesNotAllowAlternatives_ThrowsArgumentException()
+    public async Task AddAlternativaAsync_QuandoTipoPerguntaNaoPermitirAlternativas_LancaArgumentException()
     {
         // Arrange
         int perguntaId = 1;
@@ -101,7 +101,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task AddAlternativaAsync_WhenTextoIsEmpty_ThrowsArgumentException()
+    public async Task AddAlternativaAsync_QuandoTextoEstiverVazio_LancaArgumentException()
     {
         // Arrange
         int perguntaId = 1;
@@ -123,7 +123,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task AddAlternativaAsync_WhenDuplicateTextoInPergunta_ThrowsArgumentException()
+    public async Task AddAlternativaAsync_QuandoTextoDuplicadoNaPergunta_LancaArgumentException()
     {
         // Arrange
         int perguntaId = 1;
@@ -147,7 +147,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task AddAlternativaAsync_WhenValid_AddsAlternativaAndUpdatesFormulario()
+    public async Task AddAlternativaAsync_QuandoValido_AdicionaAlternativaEAtualizaFormulario()
     {
         // Arrange
         int perguntaId = 1;
@@ -178,7 +178,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task GetAlternativasByPerguntaIdAsync_WhenPerguntaNotFound_ThrowsNotFoundException()
+    public async Task GetAlternativasByPerguntaIdAsync_QuandoPerguntaNaoEncontrada_LancaNotFoundException()
     {
         // Arrange
         int perguntaId = 99;
@@ -190,7 +190,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task GetAlternativasByPerguntaIdAsync_WhenValid_ReturnsListOfAlternativas()
+    public async Task GetAlternativasByPerguntaIdAsync_QuandoValido_RetornaListaDeAlternativas()
     {
         // Arrange
         int perguntaId = 1;
@@ -215,7 +215,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task GetAlternativaByIdAsync_WhenAlternativaNotFound_ThrowsNotFoundException()
+    public async Task GetAlternativaByIdAsync_QuandoAlternativaNaoEncontrada_LancaNotFoundException()
     {
         // Arrange
         int altId = 99;
@@ -227,7 +227,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task GetAlternativaByIdAsync_WhenValid_ReturnsAlternativa()
+    public async Task GetAlternativaByIdAsync_QuandoValido_RetornaAlternativa()
     {
         // Arrange
         int altId = 1;
@@ -254,7 +254,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task UpdateAlternativaAsync_WhenDuplicateTexto_ThrowsArgumentException()
+    public async Task UpdateAlternativaAsync_QuandoTextoDuplicado_LancaArgumentException()
     {
         // Arrange
         int altId = 1;
@@ -283,7 +283,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task UpdateAlternativaAsync_WhenValid_UpdatesSuccessfully()
+    public async Task UpdateAlternativaAsync_QuandoValido_AtualizaComSucesso()
     {
         // Arrange
         int altId = 1;
@@ -319,7 +319,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task DeleteAlternativaAsync_WhenNotFound_ThrowsNotFoundException()
+    public async Task DeleteAlternativaAsync_QuandoNaoEncontrada_LancaNotFoundException()
     {
         // Arrange
         int altId = 99;
@@ -331,7 +331,7 @@ public class AlternativaServiceTests
     }
 
     [Fact]
-    public async Task DeleteAlternativaAsync_WhenValid_DeletesAlternativaAndUpdatesFormulario()
+    public async Task DeleteAlternativaAsync_QuandoValido_DeletaAlternativaEAtualizaFormulario()
     {
         // Arrange
         int altId = 1;

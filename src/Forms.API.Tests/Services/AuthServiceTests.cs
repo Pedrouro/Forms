@@ -26,7 +26,7 @@ public class AuthServiceTests : IDisposable
     }
 
     [Fact]
-    public async Task Login_WhenUserDoesNotExist_ReturnsFalseWithInvalidCredentialsMessage()
+    public async Task Login_QuandoUsuarioNaoExistir_RetornaFalseComMensagemDeCredenciaisInvalidas()
     {
         // Arrange
         var loginDto = new LoginDTO { Email = "naoexiste@test.com", Senha = "123" };
@@ -43,7 +43,7 @@ public class AuthServiceTests : IDisposable
     }
 
     [Fact]
-    public async Task Login_WhenPasswordDoesNotMatch_ReturnsFalseWithInvalidCredentialsMessage()
+    public async Task Login_QuandoSenhaNaoConferir_RetornaFalseComMensagemDeCredenciaisInvalidas()
     {
         // Arrange
         var passwordHash = BCrypt.Net.BCrypt.HashPassword("CorrectPassword");
@@ -70,7 +70,7 @@ public class AuthServiceTests : IDisposable
     }
 
     [Fact]
-    public async Task Login_WhenCredentialsAreValid_ReturnsTrueWithBearerToken()
+    public async Task Login_QuandoCredenciaisForemValidas_RetornaTrueComBearerToken()
     {
         // Arrange
         string rawPassword = "ValidPassword123!";
@@ -98,7 +98,7 @@ public class AuthServiceTests : IDisposable
     }
 
     [Fact]
-    public void GerarToken_WhenJwtKeyIsMissing_ThrowsException()
+    public void GerarToken_QuandoJwtKeyEstiverAusente_LancaException()
     {
         // Arrange
         Environment.SetEnvironmentVariable("JWT_KEY", null);
@@ -117,7 +117,7 @@ public class AuthServiceTests : IDisposable
     }
 
     [Fact]
-    public void GerarToken_WhenJwtKeyIsValid_ReturnsTokenString()
+    public void GerarToken_QuandoJwtKeyForValida_RetornaTokenString()
     {
         // Arrange
         var usuario = new UsuarioModel

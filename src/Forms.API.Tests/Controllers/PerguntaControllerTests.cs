@@ -22,7 +22,7 @@ public class PerguntaControllerTests
     [InlineData(null)]
     [InlineData(0)]
     [InlineData(-1)]
-    public async Task CreatePergunta_WhenFormularioIdIsInvalid_ReturnsBadRequest(int? formularioId)
+    public async Task CreatePergunta_QuandoFormularioIdForInvalido_RetornaBadRequest(int? formularioId)
     {
         // Arrange
         var perguntaDto = new PerguntaDTO
@@ -44,7 +44,7 @@ public class PerguntaControllerTests
     }
 
     [Fact]
-    public async Task CreatePergunta_WhenValid_ReturnsCreatedAtActionResult()
+    public async Task CreatePergunta_QuandoValido_RetornaCreatedAtActionResult()
     {
         // Arrange
         var perguntaDto = new PerguntaDTO
@@ -84,7 +84,7 @@ public class PerguntaControllerTests
     }
 
     [Fact]
-    public async Task GetPergunta_WithExistingId_ReturnsOkResultWithPergunta()
+    public async Task GetPergunta_ComIdExistente_RetornaOkResultComPergunta()
     {
         // Arrange
         int perguntaId = 5;
@@ -112,7 +112,7 @@ public class PerguntaControllerTests
     }
 
     [Fact]
-    public async Task GetPerguntasPorFormulario_WithValidFormularioId_ReturnsOkResultWithList()
+    public async Task GetPerguntasPorFormulario_ComFormularioIdValido_RetornaOkResultComLista()
     {
         // Arrange
         int formularioId = 1;
@@ -137,7 +137,7 @@ public class PerguntaControllerTests
     }
 
     [Fact]
-    public async Task UpdatePergunta_WithValidData_ReturnsOkResultWithResponseDTO()
+    public async Task UpdatePergunta_ComDadosValidos_RetornaOkResultComResponseDTO()
     {
         // Arrange
         int perguntaId = 5;
@@ -169,7 +169,7 @@ public class PerguntaControllerTests
     }
 
     [Fact]
-    public async Task UpdatePerguntasPorFormulario_WithValidData_ReturnsOkResultWithResponseDTO()
+    public async Task UpdatePerguntasPorFormulario_ComDadosValidos_RetornaOkResultComResponseDTO()
     {
         // Arrange
         int formularioId = 1;
@@ -204,7 +204,7 @@ public class PerguntaControllerTests
     }
 
     [Fact]
-    public async Task DeletePergunta_WithValidId_ReturnsOkResultWithResponseDTO()
+    public async Task DeletePergunta_ComIdValido_RetornaOkResultComResponseDTO()
     {
         // Arrange
         int perguntaId = 5;

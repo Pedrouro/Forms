@@ -8,7 +8,7 @@ namespace Forms.API.Tests.Mappers;
 public class FormularioMapperTests
 {
     [Fact]
-    public void ToModel_MapsDtoToFormularioModelCorrectly()
+    public void ToModel_MapeiaDtoParaFormularioModelCorretamente()
     {
         // Arrange
         var criador = new UsuarioModel
@@ -44,7 +44,7 @@ public class FormularioMapperTests
     }
 
     [Fact]
-    public void ApplyUpdate_UpdatesFieldsCorrectly()
+    public void ApplyUpdate_AtualizaCamposCorretamente()
     {
         // Arrange
         var criador = new UsuarioModel
@@ -83,7 +83,7 @@ public class FormularioMapperTests
     }
 
     [Fact]
-    public void ToResponseDTO_MapsModelToResponseDtoCorrectly()
+    public void ToResponseDTO_MapeiaModelParaResponseDtoCorretamente()
     {
         // Arrange
         var criador = new UsuarioModel

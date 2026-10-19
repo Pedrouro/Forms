@@ -8,7 +8,7 @@ namespace Forms.API.Tests.Mappers;
 public class PerguntaMapperTests
 {
     [Fact]
-    public void ToModel_MapsDtoToPerguntaModelCorrectly()
+    public void ToModel_MapeiaDtoParaPerguntaModelCorretamente()
     {
         // Arrange
         var dto = new PerguntaDTO
@@ -37,7 +37,7 @@ public class PerguntaMapperTests
     }
 
     [Fact]
-    public void ApplyUpdate_UpdatesFieldsCorrectly()
+    public void ApplyUpdate_AtualizaCamposCorretamente()
     {
         // Arrange
         var model = new PerguntaModel
@@ -69,7 +69,7 @@ public class PerguntaMapperTests
     }
 
     [Fact]
-    public void ToResponseDTO_MapsModelToResponseDtoCorrectly()
+    public void ToResponseDTO_MapeiaModelParaResponseDtoCorretamente()
     {
         // Arrange
         var model = new PerguntaModel

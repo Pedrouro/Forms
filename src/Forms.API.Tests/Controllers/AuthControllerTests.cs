@@ -18,7 +18,7 @@ public class AuthControllerTests
     }
 
     [Fact]
-    public async Task Login_WithValidCredentials_ReturnsOkResultWithResponseDTO()
+    public async Task Login_ComCredenciaisValidas_RetornaOkResultComResponseDTO()
     {
         // Arrange
         var loginDto = new LoginDTO { Email = "user@test.com", Senha = "Password123!" };
@@ -40,7 +40,7 @@ public class AuthControllerTests
     }
 
     [Fact]
-    public async Task Login_WithInvalidCredentials_ReturnsBadRequestResult()
+    public async Task Login_ComCredenciaisInvalidas_RetornaBadRequestResult()
     {
         // Arrange
         var loginDto = new LoginDTO { Email = "user@test.com", Senha = "WrongPassword" };

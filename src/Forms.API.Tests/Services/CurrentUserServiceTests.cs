@@ -18,7 +18,7 @@ public class CurrentUserServiceTests
     }
 
     [Fact]
-    public void GetCurrentUserId_WhenNameIdentifierClaimExists_ReturnsParsedUserId()
+    public void GetCurrentUserId_QuandoClaimNameIdentifierExistir_RetornaUserIdConvertido()
     {
         // Arrange
         var claims = new[] { new Claim(ClaimTypes.NameIdentifier, "42") };
@@ -36,7 +36,7 @@ public class CurrentUserServiceTests
     }
 
     [Fact]
-    public void GetCurrentUserId_WhenClaimOrHttpContextMissing_ThrowsUnauthorizedAccessException()
+    public void GetCurrentUserId_QuandoClaimOuHttpContextEstiverAusente_LancaUnauthorizedAccessException()
     {
         // Arrange
         _httpContextAccessorMock.Setup(a => a.HttpContext).Returns((HttpContext?)null);
@@ -47,7 +47,7 @@ public class CurrentUserServiceTests
     }
 
     [Fact]
-    public void GetCurrentUserPerfil_WhenRoleClaimExists_ReturnsParsedPerfilUsuario()
+    public void GetCurrentUserPerfil_QuandoClaimRoleExistir_RetornaPerfilUsuarioConvertido()
     {
         // Arrange
         var claims = new[] { new Claim(ClaimTypes.Role, PerfilUsuario.Administrador.ToString()) };
@@ -65,7 +65,7 @@ public class CurrentUserServiceTests
     }
 
     [Fact]
-    public void GetCurrentUserPerfil_WhenRoleClaimMissing_ThrowsUnauthorizedAccessException()
+    public void GetCurrentUserPerfil_QuandoClaimRoleEstiverAusente_LancaUnauthorizedAccessException()
     {
         // Arrange
         var httpContext = new DefaultHttpContext { User = new ClaimsPrincipal() };

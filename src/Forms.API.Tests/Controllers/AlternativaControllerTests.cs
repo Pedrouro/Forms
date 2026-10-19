@@ -21,7 +21,7 @@ public class AlternativaControllerTests
     [InlineData(null)]
     [InlineData(0)]
     [InlineData(-1)]
-    public async Task CreateAlternativa_WhenPerguntaIdIsInvalid_ReturnsBadRequest(int? perguntaId)
+    public async Task CreateAlternativa_QuandoPerguntaIdForInvalido_RetornaBadRequest(int? perguntaId)
     {
         // Arrange
         var alternativaDto = new AlternativaDTO
@@ -42,7 +42,7 @@ public class AlternativaControllerTests
     }
 
     [Fact]
-    public async Task CreateAlternativa_WhenValid_ReturnsCreatedAtActionResult()
+    public async Task CreateAlternativa_QuandoValido_RetornaCreatedAtActionResult()
     {
         // Arrange
         var alternativaDto = new AlternativaDTO
@@ -80,7 +80,7 @@ public class AlternativaControllerTests
     }
 
     [Fact]
-    public async Task GetAlternativa_WithExistingId_ReturnsOkResultWithAlternativa()
+    public async Task GetAlternativa_ComIdExistente_RetornaOkResultComAlternativa()
     {
         // Arrange
         int alternativaId = 10;
@@ -107,7 +107,7 @@ public class AlternativaControllerTests
     }
 
     [Fact]
-    public async Task GetAlternativasPorPergunta_WithValidPerguntaId_ReturnsOkResultWithList()
+    public async Task GetAlternativasPorPergunta_ComPerguntaIdValido_RetornaOkResultComLista()
     {
         // Arrange
         int perguntaId = 1;
@@ -132,7 +132,7 @@ public class AlternativaControllerTests
     }
 
     [Fact]
-    public async Task UpdateAlternativa_WithValidData_ReturnsOkResultWithResponseDTO()
+    public async Task UpdateAlternativa_ComDadosValidos_RetornaOkResultComResponseDTO()
     {
         // Arrange
         int alternativaId = 10;
@@ -160,7 +160,7 @@ public class AlternativaControllerTests
     }
 
     [Fact]
-    public async Task UpdateAlternativasPorPergunta_WithValidData_ReturnsOkResultWithResponseDTO()
+    public async Task UpdateAlternativasPorPergunta_ComDadosValidos_RetornaOkResultComResponseDTO()
     {
         // Arrange
         int perguntaId = 1;
@@ -195,7 +195,7 @@ public class AlternativaControllerTests
     }
 
     [Fact]
-    public async Task DeleteAlternativa_WithValidId_ReturnsOkResultWithResponseDTO()
+    public async Task DeleteAlternativa_ComIdValido_RetornaOkResultComResponseDTO()
     {
         // Arrange
         int alternativaId = 10;

@@ -20,7 +20,7 @@ public class UsuarioControllerTests
     }
 
     [Fact]
-    public async Task CreateUsuario_WithValidData_ReturnsOkResultWithResponseDTO()
+    public async Task CreateUsuario_ComDadosValidos_RetornaOkResultComResponseDTO()
     {
         // Arrange
         var usuarioDto = new UsuarioDTO
@@ -48,7 +48,7 @@ public class UsuarioControllerTests
     }
 
     [Fact]
-    public async Task GetUsuario_WithValidId_ReturnsOkResultWithUsuarioModel()
+    public async Task GetUsuario_ComIdValido_RetornaOkResultComUsuarioModel()
     {
         // Arrange
         int userId = 1;
@@ -77,7 +77,7 @@ public class UsuarioControllerTests
     }
 
     [Fact]
-    public async Task GetAllUsuarios_WhenCalled_ReturnsOkResultWithListOfUsuarios()
+    public async Task GetAllUsuarios_QuandoChamado_RetornaOkResultComListaDeUsuarios()
     {
         // Arrange
         var usersList = new List<UsuarioModel>
@@ -101,7 +101,7 @@ public class UsuarioControllerTests
     }
 
     [Fact]
-    public async Task DeleteUsuario_WithValidId_ReturnsOkResultWithMessage()
+    public async Task DeleteUsuario_ComIdValido_RetornaOkResultComMensagem()
     {
         // Arrange
         int userId = 1;
@@ -122,7 +122,7 @@ public class UsuarioControllerTests
     }
 
     [Fact]
-    public async Task UpdateUsuario_WithValidData_ReturnsOkResultWithResponseDTO()
+    public async Task UpdateUsuario_ComDadosValidos_RetornaOkResultComResponseDTO()
     {
         // Arrange
         int userId = 1;

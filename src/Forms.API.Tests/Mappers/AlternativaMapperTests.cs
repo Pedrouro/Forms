@@ -7,7 +7,7 @@ namespace Forms.API.Tests.Mappers;
 public class AlternativaMapperTests
 {
     [Fact]
-    public void ToModel_MapsDtoToAlternativaModelCorrectly()
+    public void ToModel_MapeiaDtoParaAlternativaModelCorretamente()
     {
         // Arrange
         var dto = new AlternativaDTO { Texto = "  Alternativa 1  " };
@@ -21,7 +21,7 @@ public class AlternativaMapperTests
     }
 
     [Fact]
-    public void ApplyUpdate_UpdatesTextoCorrectly()
+    public void ApplyUpdate_AtualizaTextoCorretamente()
     {
         // Arrange
         var model = new AlternativaModel
@@ -41,7 +41,7 @@ public class AlternativaMapperTests
     }
 
     [Fact]
-    public void ToResponseDTO_MapsModelToResponseDtoCorrectly()
+    public void ToResponseDTO_MapeiaModelParaResponseDtoCorretamente()
     {
         // Arrange
         var model = new AlternativaModel

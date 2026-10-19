@@ -53,7 +53,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task AddFormularioAsync_WhenUserNotFound_ThrowsNotFoundException()
+    public async Task AddFormularioAsync_QuandoUsuarioNaoEncontrado_LancaNotFoundException()
     {
         // Arrange
         int userId = 99;
@@ -69,7 +69,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task AddFormularioAsync_WhenQuestionDoesNotAllowAlternativesButHasThem_ThrowsArgumentException()
+    public async Task AddFormularioAsync_QuandoPerguntaNaoPermitirAlternativasMasPossuir_LancaArgumentException()
     {
         // Arrange
         int userId = 1;
@@ -98,7 +98,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task AddFormularioAsync_WhenAlternativeTextIsEmpty_ThrowsArgumentException()
+    public async Task AddFormularioAsync_QuandoTextoDaAlternativaEstiverVazio_LancaArgumentException()
     {
         // Arrange
         int userId = 1;
@@ -127,7 +127,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task AddFormularioAsync_WhenValid_AddsFormularioAndReturnsResponseDTO()
+    public async Task AddFormularioAsync_QuandoValido_AdicionaFormularioERetornaResponseDTO()
     {
         // Arrange
         int userId = 1;
@@ -158,7 +158,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task GetFormularioByIdAsync_WhenFormularioNotFound_ThrowsNotFoundException()
+    public async Task GetFormularioByIdAsync_QuandoFormularioNaoEncontrado_LancaNotFoundException()
     {
         // Arrange
         int formId = 1;
@@ -170,7 +170,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task GetFormularioByIdAsync_WhenNotPublishedAndUserNotOwnerNorAdmin_ThrowsNotFoundException()
+    public async Task GetFormularioByIdAsync_QuandoNaoPublicadoEUsuarioNaoForDonoNemAdmin_LancaNotFoundException()
     {
         // Arrange
         int formId = 1;
@@ -188,7 +188,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task GetFormularioByIdAsync_WhenFormularioIsPublished_ReturnsFormularioEvenIfNotOwner()
+    public async Task GetFormularioByIdAsync_QuandoFormularioEstiverPublicado_RetornaFormularioMesmoNaoSendoDono()
     {
         // Arrange
         int formId = 1;
@@ -209,7 +209,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task GetFormularioByIdAsync_WhenUserIsOwner_ReturnsFormulario()
+    public async Task GetFormularioByIdAsync_QuandoUsuarioForDono_RetornaFormulario()
     {
         // Arrange
         int formId = 1;
@@ -229,7 +229,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task GetAllFormulariosAsync_WhenCalled_ReturnsAllMappedFormularios()
+    public async Task GetAllFormulariosAsync_QuandoChamado_RetornaTodosOsFormulariosMapeados()
     {
         // Arrange
         var list = new List<FormularioModel>
@@ -248,7 +248,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task UpdateFormularioAsync_WhenNotFound_ThrowsNotFoundException()
+    public async Task UpdateFormularioAsync_QuandoNaoEncontrado_LancaNotFoundException()
     {
         // Arrange
         int formId = 1;
@@ -260,7 +260,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task UpdateFormularioAsync_WhenUserNotAuthorized_ThrowsForbiddenException()
+    public async Task UpdateFormularioAsync_QuandoUsuarioNaoAutorizado_LancaForbiddenException()
     {
         // Arrange
         int formId = 1;
@@ -277,7 +277,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task UpdateFormularioAsync_WhenUserIsOwner_UpdatesFormularioSuccessfully()
+    public async Task UpdateFormularioAsync_QuandoUsuarioForDono_AtualizaFormularioComSucesso()
     {
         // Arrange
         int formId = 1;
@@ -308,7 +308,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task DeleteFormularioAsync_WhenNotFound_ThrowsNotFoundException()
+    public async Task DeleteFormularioAsync_QuandoNaoEncontrado_LancaNotFoundException()
     {
         // Arrange
         int formId = 1;
@@ -320,7 +320,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task DeleteFormularioAsync_WhenUserNotAuthorized_ThrowsForbiddenException()
+    public async Task DeleteFormularioAsync_QuandoUsuarioNaoAutorizado_LancaForbiddenException()
     {
         // Arrange
         int formId = 1;
@@ -337,7 +337,7 @@ public class FormularioServiceTests
     }
 
     [Fact]
-    public async Task DeleteFormularioAsync_WhenUserIsAdmin_DeletesSuccessfully()
+    public async Task DeleteFormularioAsync_QuandoUsuarioForAdmin_DeletaComSucesso()
     {
         // Arrange
         int formId = 1;

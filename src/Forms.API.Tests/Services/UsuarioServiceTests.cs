@@ -41,7 +41,7 @@ public class UsuarioServiceTests
     }
 
     [Fact]
-    public async Task AddUsuario_WhenEmailIsInvalid_ThrowsArgumentException()
+    public async Task AddUsuario_QuandoEmailForInvalido_LancaArgumentException()
     {
         // Arrange
         var usuarioDto = new UsuarioDTO
@@ -59,7 +59,7 @@ public class UsuarioServiceTests
     }
 
     [Fact]
-    public async Task AddUsuario_WhenEmailAlreadyExists_ThrowsArgumentException()
+    public async Task AddUsuario_QuandoEmailJaExistir_LancaArgumentException()
     {
         // Arrange
         var usuarioDto = new UsuarioDTO
@@ -90,7 +90,7 @@ public class UsuarioServiceTests
     }
 
     [Fact]
-    public async Task AddUsuario_WhenValid_AddsUserAndReturnsSuccessResponse()
+    public async Task AddUsuario_QuandoValido_AdicionaUsuarioERetornaRespostaDeSucesso()
     {
         // Arrange
         var usuarioDto = new UsuarioDTO
@@ -123,7 +123,7 @@ public class UsuarioServiceTests
     }
 
     [Fact]
-    public async Task GetUsuarioById_WhenUserIsNotOwnerAndNotAdmin_ThrowsKeyNotFoundException()
+    public async Task GetUsuarioById_QuandoUsuarioNaoForDonoNemAdmin_LancaKeyNotFoundException()
     {
         // Arrange
         SetHttpContextUser("2", PerfilUsuario.Comum.ToString());
@@ -134,7 +134,7 @@ public class UsuarioServiceTests
     }
 
     [Fact]
-    public async Task GetUsuarioById_WhenUserIsOwner_ReturnsUsuario()
+    public async Task GetUsuarioById_QuandoUsuarioForDono_RetornaUsuario()
     {
         // Arrange
         int userId = 1;
@@ -162,7 +162,7 @@ public class UsuarioServiceTests
     }
 
     [Fact]
-    public async Task GetUsuarioById_WhenUserIsAdmin_ReturnsUsuario()
+    public async Task GetUsuarioById_QuandoUsuarioForAdmin_RetornaUsuario()
     {
         // Arrange
         int targetUserId = 1;
@@ -190,7 +190,7 @@ public class UsuarioServiceTests
     }
 
     [Fact]
-    public async Task GetAllUsuarios_WhenCalled_ReturnsAllUsers()
+    public async Task GetAllUsuarios_QuandoChamado_RetornaTodosOsUsuarios()
     {
         // Arrange
         var list = new List<UsuarioModel>
@@ -211,7 +211,7 @@ public class UsuarioServiceTests
     }
 
     [Fact]
-    public async Task UpdateUsuario_WhenEmailIsInvalid_ThrowsArgumentException()
+    public async Task UpdateUsuario_QuandoEmailForInvalido_LancaArgumentException()
     {
         // Arrange
         int userId = 1;
@@ -243,7 +243,7 @@ public class UsuarioServiceTests
     }
 
     [Fact]
-    public async Task UpdateUsuario_WhenPasswordChanges_HashesNewPasswordAndUpdates()
+    public async Task UpdateUsuario_QuandoSenhaForAlterada_GeraHashDaNovaSenhaEAtualiza()
     {
         // Arrange
         int userId = 1;
@@ -288,7 +288,7 @@ public class UsuarioServiceTests
     }
 
     [Fact]
-    public async Task DeleteUsuario_WhenCalled_CallsRepositoryDelete()
+    public async Task DeleteUsuario_QuandoChamado_ChamaDeleteDoRepositorio()
     {
         // Arrange
         int userId = 1;

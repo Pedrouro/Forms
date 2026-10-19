@@ -65,7 +65,7 @@ public class PerguntaServiceTests
         };
 
     [Fact]
-    public async Task AddPerguntaAsync_WhenFormularioNotFound_ThrowsNotFoundException()
+    public async Task AddPerguntaAsync_QuandoFormularioNaoEncontrado_LancaNotFoundException()
     {
         // Arrange
         int formId = 1;
@@ -79,7 +79,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task AddPerguntaAsync_WhenUserNotAuthorized_ThrowsForbiddenException()
+    public async Task AddPerguntaAsync_QuandoUsuarioNaoAutorizado_LancaForbiddenException()
     {
         // Arrange
         int formId = 1;
@@ -96,7 +96,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task AddPerguntaAsync_WhenFormularioEncerrado_ThrowsArgumentException()
+    public async Task AddPerguntaAsync_QuandoFormularioEncerrado_LancaArgumentException()
     {
         // Arrange
         int formId = 1;
@@ -114,7 +114,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task AddPerguntaAsync_WhenTypeDoesNotAllowAlternativesButHasThem_ThrowsArgumentException()
+    public async Task AddPerguntaAsync_QuandoTipoNaoPermitirAlternativasMasPossuir_LancaArgumentException()
     {
         // Arrange
         int formId = 1;
@@ -137,7 +137,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task AddPerguntaAsync_WhenValid_AddsPerguntaAndUpdatesFormulario()
+    public async Task AddPerguntaAsync_QuandoValido_AdicionaPerguntaEAtualizaFormulario()
     {
         // Arrange
         int formId = 1;
@@ -170,7 +170,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task GetPerguntaByIdAsync_WhenPerguntaNotFound_ThrowsNotFoundException()
+    public async Task GetPerguntaByIdAsync_QuandoPerguntaNaoEncontrada_LancaNotFoundException()
     {
         // Arrange
         int perguntaId = 99;
@@ -182,7 +182,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task GetPerguntaByIdAsync_WhenValid_ReturnsPerguntaResponse()
+    public async Task GetPerguntaByIdAsync_QuandoValido_RetornaPerguntaResponse()
     {
         // Arrange
         int perguntaId = 1;
@@ -206,7 +206,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task GetPerguntasByFormularioIdAsync_WhenValid_ReturnsListOfPerguntas()
+    public async Task GetPerguntasByFormularioIdAsync_QuandoValido_RetornaListaDePerguntas()
     {
         // Arrange
         int formId = 10;
@@ -231,7 +231,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task UpdatePerguntaAsync_WhenChangingTypeToNoAlternatives_ClearsAlternatives()
+    public async Task UpdatePerguntaAsync_QuandoAlterarTipoParaSemAlternativas_LimpaAlternativas()
     {
         // Arrange
         int perguntaId = 1;
@@ -269,7 +269,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task UpdatePerguntasPorFormularioAsync_WhenEmptyList_ThrowsArgumentException()
+    public async Task UpdatePerguntasPorFormularioAsync_QuandoListaVazia_LancaArgumentException()
     {
         // Arrange
         int formId = 10;
@@ -287,7 +287,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task UpdatePerguntasPorFormularioAsync_WhenDuplicateIds_ThrowsArgumentException()
+    public async Task UpdatePerguntasPorFormularioAsync_QuandoIdsDuplicados_LancaArgumentException()
     {
         // Arrange
         int formId = 10;
@@ -311,7 +311,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task DeletePerguntaAsync_WhenNotFound_ThrowsNotFoundException()
+    public async Task DeletePerguntaAsync_QuandoNaoEncontrada_LancaNotFoundException()
     {
         // Arrange
         int perguntaId = 99;
@@ -323,7 +323,7 @@ public class PerguntaServiceTests
     }
 
     [Fact]
-    public async Task DeletePerguntaAsync_WhenValid_DeletesPerguntaAndUpdatesFormulario()
+    public async Task DeletePerguntaAsync_QuandoValido_DeletaPerguntaEAtualizaFormulario()
     {
         // Arrange
         int perguntaId = 1;

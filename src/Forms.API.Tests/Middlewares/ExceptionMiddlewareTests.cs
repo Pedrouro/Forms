@@ -17,7 +17,7 @@ public class ExceptionMiddlewareTests
     }
 
     [Fact]
-    public async Task InvokeAsync_WhenNoException_CallsNextDelegate()
+    public async Task InvokeAsync_QuandoNaoHouverExcecao_ChamaProximoDelegate()
     {
         // Arrange
         bool nextCalled = false;
@@ -44,7 +44,7 @@ public class ExceptionMiddlewareTests
     [InlineData(typeof(KeyNotFoundException), 404)]
     [InlineData(typeof(NotFoundException), 404)]
     [InlineData(typeof(Exception), 500)]
-    public async Task InvokeAsync_WhenExceptionThrown_ReturnsCorrectStatusCodeAndJson(Type exceptionType, int expectedStatusCode)
+    public async Task InvokeAsync_QuandoExcecaoForLancada_RetornaStatusCodeEJsonCorretos(Type exceptionType, int expectedStatusCode)
     {
         // Arrange
         var exception = (Exception)Activator.CreateInstance(exceptionType, "Erro de teste")!;
