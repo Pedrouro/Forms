@@ -43,11 +43,36 @@ services:
       bash -c "
         rm -rf bin obj &&
         dotnet restore &&
-        dotnet watch --project ProjetoForms.csproj run --urls=http://0.0.0.0:8080
+        dotnet watch --project src/Forms.API/Forms.API.csproj run --urls=http://0.0.0.0:8080
       "
 
     volumes:
       - .:/src
 
+  web:
+    image: node:22-alpine
+
+    working_dir: /app
+
+    ports:
+      - "3000:63061"
+
+    depends_on:
+      - api
+
+    environment:
+      VITE_API_TARGET: "http://api:8080"
+
+    command: >
+      sh -c "
+        npm install &&
+        npm run dev -- --host 0.0.0.0 --port 63061
+      "
+
+    volumes:
+      - ./src/Forms.WEB:/app
+      - web_node_modules:/app/node_modules
+
 volumes:
   sql_data:
+  web_node_modules:

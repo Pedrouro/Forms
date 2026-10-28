@@ -38,5 +38,16 @@ services:
       JWT_ISSUER: "${JWT_ISSUER}"
       JWT_AUDIENCE: "${JWT_AUDIENCE}"
 
+  web:
+    build:
+      context: .
+      dockerfile: src/Forms.WEB/Dockerfile
+
+    ports:
+      - "3000:80"
+
+    depends_on:
+      - api
+
 volumes:
   sql_data:
