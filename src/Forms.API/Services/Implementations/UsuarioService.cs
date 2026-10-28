@@ -1,4 +1,4 @@
-﻿using BCrypt.Net;
+using BCrypt.Net;
 using System.Security.Claims;
 using System.Net.Mail;
 using Forms.API.Enums;
@@ -35,7 +35,7 @@ namespace Forms.API.Services.Implementations
                 Nome = usuario.Nome,
                 Email = usuario.Email,
                 Senha = hash,
-                Perfil = usuario.Perfil
+                Perfil = PerfilUsuario.Comum
             };
 
             await _UsuarioRepository.AddAsync(user);

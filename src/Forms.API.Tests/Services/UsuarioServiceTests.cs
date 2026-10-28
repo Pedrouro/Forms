@@ -118,8 +118,36 @@ public class UsuarioServiceTests
         _usuarioRepositoryMock.Verify(r => r.AddAsync(It.Is<UsuarioModel>(u =>
             u.Nome == usuarioDto.Nome &&
             u.Email == usuarioDto.Email &&
-            u.Perfil == usuarioDto.Perfil &&
+            u.Perfil == PerfilUsuario.Comum &&
             BCrypt.Net.BCrypt.Verify(usuarioDto.Senha, u.Senha))), Times.Once);
+    }
+
+    [Fact]
+    public async Task AddUsuario_DefinePerfilComumPorPadrao()
+    {
+        // Arrange
+        var usuarioDto = new UsuarioDTO
+        {
+            Nome = "Novo Usuário",
+            Email = "padrao@test.com",
+            Senha = "PlainPassword123!"
+        };
+
+        _usuarioRepositoryMock
+            .Setup(r => r.GetByEmailAsync(usuarioDto.Email))
+            .ReturnsAsync((UsuarioModel?)null);
+
+        _usuarioRepositoryMock
+            .Setup(r => r.AddAsync(It.IsAny<UsuarioModel>()))
+            .Returns(Task.CompletedTask);
+
+        // Act
+        var result = await _service.AddUsuario(usuarioDto);
+
+        // Assert
+        Assert.True(result.Status);
+        _usuarioRepositoryMock.Verify(r => r.AddAsync(It.Is<UsuarioModel>(u =>
+            u.Perfil == PerfilUsuario.Comum)), Times.Once);
     }
 
     [Fact]

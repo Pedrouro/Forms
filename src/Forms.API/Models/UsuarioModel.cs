@@ -1,4 +1,4 @@
-﻿using Forms.API.Enums;
+using Forms.API.Enums;
 
 namespace Forms.API.Models
 {
@@ -8,6 +8,6 @@ namespace Forms.API.Models
         public required string Nome { get; set; }
         public required string Email { get; set; }
         public required string Senha { get; set; }
-        public required PerfilUsuario Perfil { get; set; }
+        public PerfilUsuario Perfil { get; set; } = PerfilUsuario.Comum;
     }
 }
