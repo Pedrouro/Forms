@@ -40,9 +40,6 @@ namespace Forms.API.Services.Implementations
             if (string.IsNullOrWhiteSpace(dto.Texto))
                 throw new ArgumentException("O texto da alternativa é obrigatório.");
 
-            if (pergunta.Alternativas.Any(a => a.Texto.Trim().Equals(dto.Texto.Trim(), StringComparison.OrdinalIgnoreCase)))
-                throw new ArgumentException("Já existe uma alternativa com esse texto nesta pergunta.");
-
             AlternativaModel alternativa = dto.ToModel(perguntaId);
             await _alternativaRepository.AddAsync(alternativa);
 
